@@ -5,16 +5,17 @@ const checkIfLastPlayerRollInFrame = (frameIndex, framePoints, rollsCount) => {
     return framePoints === 10 || rollsCount === 2
   }
 
-  return rollsCount ===3 || (rollsCount === 2 && framePoints < 10);
+  return rollsCount === 3 || (rollsCount === 2 && framePoints < 10);
 };
 
 const initialGameState = {
   frames: {},
   points: {},
-  playersCount: 0,
   currentPlayerIndex: 0,
   currentFrameIndex: 0,
-  status: 'new',
+  pinsOnStand: 10,
+  playersCount: 0,
+  status: 'new'
 };
 
 export default function game(state = {}, action) {
@@ -53,11 +54,13 @@ export default function game(state = {}, action) {
     if (currentPlayerPoints[currentFrameIndex - 1] === 10 && currentFrameRolls.length === 1 || currentPlayerFrames[currentFrameIndex - 1].length === 1) {
       updatedFramesPoints.push(currentPlayerPoints[currentFrameIndex - 1] + action.pins)
     }
-
   }
 
   const isLastPlayerRollInFrame = checkIfLastPlayerRollInFrame(currentFrameIndex, currentFramePoints, currentFrameRolls.length);
   const gameIsOver =  isLastPlayerRollInFrame && currentFrameIndex === 9 && currentPlayerIndex === playersCount - 1
+  const pinsOnStand = currentFramePoints === 10 ? 10 : 10 - action.pins;
+
+  console.log(pinsOnStand);
 
   return {
     frames: {
@@ -81,7 +84,8 @@ export default function game(state = {}, action) {
     currentFrameIndex: isLastPlayerRollInFrame && currentPlayerIndex === playersCount - 1
       ? currentFrameIndex + 1
       : currentFrameIndex,
-    status: gameIsOver ? 'over' : 'active',
+    pinsOnStand,
     playersCount: state.playersCount,
+    status: gameIsOver ? 'over' : 'active'
   };
 }

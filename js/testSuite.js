@@ -1,5 +1,5 @@
 import assert from './utils/assert';
-import { addPlayer,newGame, roll } from './actions';
+import { addPlayer, newGame, roll } from './actions';
 
 function testSuite(dispatch, getState) {
   dispatch(newGame());

@@ -40,10 +40,12 @@ const render = () => {
 store.subscribe(render);
 store.dispatch(newGame());
 
+const getRandomRoll = (rest) => Math.floor(Math.random() * rest) + 1;
+
 // DOM events
 document.addEventListener('click', e => {
   if (e.target.matches('.roll')) {
-    store.dispatch(roll(5));
+    store.dispatch(roll(getRandomRoll(store.getState().game.pinsOnStand)));
   } else if (e.target.matches('.add-player')) {
     let input = document.querySelector('.player-name');
     if (input.value.length) {
