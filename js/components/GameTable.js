@@ -1,6 +1,6 @@
 import { h } from '../utils/DOMUtils';
 
-const RollResult = (rolls) => {
+const RollsResult = (rolls) => {
   var result = '';
   rolls.forEach((r, i) => {
     if (r === 10) {
@@ -17,7 +17,7 @@ const RollResult = (rolls) => {
 
 const GameTable = ({ players, game: { frames, points } }) => {
   const framesCount = 10;
-  const rows = [
+  const tableContent = [
     h('DIV', {className: 'thead'}, [
       h('DIV', {className: 'row'}, [
         h('DIV', {className: 'cell'}, ['Players']),
@@ -28,16 +28,16 @@ const GameTable = ({ players, game: { frames, points } }) => {
   ])
 ];
 
-const table = h('DIV', {className: 'table'}, rows);
+const table = h('DIV', {className: 'table'}, tableContent);
 
 Object.keys(players).forEach((player, playerIndex) => {
-  const rollsCells = [
+  const tbodyCells = [
     h('DIV', {className: 'cell'}, [player])
   ];
 
-  rows.push(...[
+  tableContent.push(...[
     h('DIV', {className: 'tbody'}, [
-      h('DIV', {className: 'row'}, rollsCells)
+      h('DIV', {className: 'row'}, tbodyCells)
     ])
   ]);
 
@@ -49,18 +49,18 @@ Object.keys(players).forEach((player, playerIndex) => {
     if (playerFrames) {
       framePoints = points[playerIndex][i];
       frameRolls = playerFrames[i] ? h('DIV', [
-        h('DIV', [RollResult(playerFrames[i])]),
+        h('DIV', [RollsResult(playerFrames[i])]),
         h('DIV', [framePoints])
       ]) : '';
     }
 
-    rollsCells.push(
+    tbodyCells.push(
       h('DIV', {className: 'cell'}, [frameRolls])
     );
   }
 
   const totalPoints = points[playerIndex] ? points[playerIndex].reduce((a, b) => a + b, 0) : 0;
-  rollsCells.push(
+  tbodyCells.push(
     h('DIV', {className: 'cell'}, [totalPoints])
   );
 })
