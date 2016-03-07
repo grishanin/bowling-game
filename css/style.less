@@ -1,0 +1,92 @@
+body {
+  background: #e8edf3;
+  font-family: sans-serif;
+}
+
+h3 {
+  text-align: center;
+  font-weight: normal;
+}
+
+button {
+  border: 0;
+  border-radius: 5px;
+  line-height: 30px;
+  color: #fff;
+  background: #ff7759;
+  width: 100px;
+  margin: 20px 10px;
+  cursor: pointer;
+  outline: 0;
+
+  &:hover,
+  &.default {
+    background: #f65e3b;
+  }
+}
+
+input[type=text] {
+  // margin: 20px 10px;
+  // line-height: 30px;
+  margin: 20px 10px;
+  line-height: 24px;
+  padding: 4px;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.bowling-game {
+  max-width: 800px;
+  margin: 0 auto;
+
+  &__actions {
+    float: right;
+  }
+
+  &__action {
+    display: block;
+  }
+}
+
+.table {
+  display: table;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 0 2px #afafaf;
+  width: 100%;
+}
+
+.thead,
+.tbody,
+.tfoot {
+  display: table-row-group;
+}
+
+.thead {
+  background: #002b44;
+  color: #fff;
+}
+
+.tbody {
+  .row {
+    height: 45px;
+  }
+}
+
+.row {
+  display: table-row;
+  width: 100%;
+}
+
+.cell {
+  display: table-cell;
+  box-sizing: border-box;
+  vertical-align: middle;
+  padding: 3px;
+  width: 9%;
+
+  &:first-child,
+  &:last-child {
+    width: 80px;
+  }
+}
