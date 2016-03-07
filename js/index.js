@@ -1,5 +1,5 @@
 import createStore from './utils/createStore';
-import testSuite from './testSuite';
+//import testSuite from './testSuite';
 import bowlingApp from './reducers';
 import { newGame, startGame, addPlayer, roll } from './actions';
 import { h, createElement } from './utils/DOMUtils';
@@ -9,19 +9,18 @@ import ActionButtons from './components/ActionButtons';
 require('../css/style.less');
 
 const app = (state) => {
-  return h(
-    'DIV', {className: 'bowling-game'}, [
-      h('DIV', {className: 'bowling-game__header'}, [
-        h('H3', [
-          'Bowling Game'
-        ])
-      ]),
-      h('DIV', {className: 'bowling-game__content'}, [
-        GameTable(state),
-        ActionButtons(state.game)
+  return h('DIV', {className: 'bowling-game'}, [
+    h('DIV', {className: 'bowling-game__header'}, [
+      h('H3', [
+        'Bowling Game'
       ])
-    ]
-  );
+    ]),
+    h('DIV', {className: 'bowling-game__content'}, [
+      GameTable(state),
+      ActionButtons(state.game)
+    ])
+  ]
+);
 }
 
 const store = createStore(bowlingApp);
@@ -57,4 +56,6 @@ document.addEventListener('click', e => {
   } else if (e.target.matches('.start-game')) {
     store.dispatch(startGame());
   }
-})
+});
+
+//testSuite(store.dispatch, store.getState);

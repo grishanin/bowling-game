@@ -6,12 +6,11 @@ const createStore = (reducer) => {
 
   const dispatch = (action) => {
     state = reducer(state, action);
+    console.log(action, state);
 
     for (var i = 0; i < listeners.length; i++) {
       listeners[i]()
     }
-
-    console.log(action, state);
   }
 
   const subscribe = (listener) => {

@@ -1,11 +1,11 @@
 import clone from '../utils/clone';
 
-const checkIfLastPlayerRollInFrame = (frameIndex, framePoints, rollsCount) => {
+const checkIfLastPlayerRollInFrame = (frameIndex, restPins, rollsCount) => {
   if (frameIndex != 9) {
-    return framePoints === 10 || rollsCount === 2
+    return restPins === 0 || rollsCount === 2
   }
 
-  return rollsCount === 3 || (rollsCount === 2 && framePoints < 10);
+  return rollsCount === 3 || (rollsCount === 2 && restPins > 0);
 };
 
 const initialGameState = {
@@ -56,11 +56,9 @@ export default function game(state = {}, action) {
     }
   }
 
-  const isLastPlayerRollInFrame = checkIfLastPlayerRollInFrame(currentFrameIndex, currentFramePoints, currentFrameRolls.length);
+  const isLastPlayerRollInFrame = checkIfLastPlayerRollInFrame(currentFrameIndex, state.pinsOnStand - action.pins, currentFrameRolls.length);
   const gameIsOver =  isLastPlayerRollInFrame && currentFrameIndex === 9 && currentPlayerIndex === playersCount - 1
-  const pinsOnStand = currentFramePoints === 10 ? 10 : 10 - action.pins;
-
-  console.log(pinsOnStand);
+  const pinsOnStand = isLastPlayerRollInFrame || action.pins === 10 ? 10 : 10 - action.pins;
 
   return {
     frames: {
