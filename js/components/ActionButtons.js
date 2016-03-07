@@ -11,7 +11,7 @@ const ActionButtons = ({status, playersCount}) => {
     status === 'new' && h('button', {className: 'add-player'}, ['Add player']),
     status === 'active' && h('button', {className: 'roll'}, ['Roll']),
     status === 'new' && playersCount > 0
-    && h('button', {className: 'start-game default'}, ['Start game'])
+      && h('button', {className: 'start-game default'}, ['Start game'])
   ]);
 }
 

@@ -23,9 +23,10 @@ const GameTable = ({ players, game: { frames, points } }) => {
   const rows = [
     h('DIV', {className: 'thead'}, [
       h('DIV', {className: 'row'}, [
-        h('DIV', {className: 'cell'}, ['Players'])
-      ].concat(Array.apply(null, {length: framesCount}).map(
-        (v, i )=> h('DIV', {className: 'cell'}, [i + 1])))
+        h('DIV', {className: 'cell'}, ['Players']),
+        ...Array.apply(null, {length: framesCount}).map((v, i )=> h('DIV', {className: 'cell'}, [i + 1])),
+        h('DIV', {className: 'cell cell_total-points'}, ['Points'])
+      ]
       )
     ])
   ];
@@ -57,6 +58,11 @@ const GameTable = ({ players, game: { frames, points } }) => {
         h('DIV', {className: 'cell'}, [frameRolls])
       );
     }
+
+    const totalPoints = points[playerIndex] ? points[playerIndex].reduce((a, b) => a + b, 0) : 0;
+    rollsCells.push(
+      h('DIV', {className: 'cell'}, [totalPoints])
+    );
   })
 
   return table;
