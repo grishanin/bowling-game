@@ -1,11 +1,6 @@
 import { clone, sum } from '../utils/misc';
 
 
-function addRollToFrame(frame, fallenPinsCount) {
-  return frame ? [...frame, fallenPinsCount] : [fallenPinsCount];
-}
-
-
 function getPlayerPoints(points = [], playerFrames, frame, frameIndex, fallenPinsCount) {
   const isNotFirstFrame = frameIndex > 0;
   const rollNumber = frame.length;
@@ -45,14 +40,6 @@ function getPlayerPoints(points = [], playerFrames, frame, frameIndex, fallenPin
 }
 
 
-function isLastRollInFrameForPlayer(frameIndex, isAllPinsDown, rollNumber) {
-  if (frameIndex < 9) {
-    return isAllPinsDown || rollNumber === 2
-  }
-  return rollNumber === 3 || (rollNumber === 2 && !isAllPinsDown);
-};
-
-
 function restandPins(fallenPinsCount, isLastRoll) {
   return (isLastRoll || fallenPinsCount === 10) ? 10 : 10 - fallenPinsCount
 }
@@ -60,6 +47,18 @@ function restandPins(fallenPinsCount, isLastRoll) {
 
 function isGameOver(frameIndex, playerIndex, playersCount, isLastRoll) {
   return isLastRoll && frameIndex === 9 && playerIndex === playersCount - 1
+}
+
+
+function isLastRollInFrameForPlayer(frameIndex, isAllPinsDown, rollNumber) {
+  if (frameIndex < 9) {
+    return isAllPinsDown || rollNumber === 2
+  }
+  return rollNumber === 3 || (rollNumber === 2 && !isAllPinsDown);
+};
+
+function addRollToFrame(frame, fallenPinsCount) {
+  return frame ? [...frame, fallenPinsCount] : [fallenPinsCount];
 }
 
 
