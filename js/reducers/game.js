@@ -13,7 +13,6 @@ function getPlayerPoints(points = [], playerFrames, frame, frameIndex, fallenPin
 
   const updatedPoints = [];
   if (isNotFirstFrame && !isBonusRoll) {
-
     const isPrevTwoRollsStrike = frameIndex > 1
       && playerFrames[frameIndex - 1].length === 1
       && playerFrames[frameIndex - 2].length === 1;
@@ -30,7 +29,7 @@ function getPlayerPoints(points = [], playerFrames, frame, frameIndex, fallenPin
   }
 
   const framePoints = frame.reduce(sum, 0);
-  const shouldUpdatePreviousPoints = updatedPoints && updatedPoints.length;
+  const shouldUpdatePreviousPoints = !!updatedPoints.length;
   if (shouldUpdatePreviousPoints) {
     return [
       ...points.slice(0, frameIndex - updatedPoints.length),
