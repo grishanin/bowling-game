@@ -1,4 +1,4 @@
-import isArray from './isArray';
+import { isArray } from './misc';
 
 const DOMAttributeNames = {
   className: 'class'

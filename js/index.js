@@ -3,6 +3,7 @@ import createStore from './utils/createStore';
 import bowlingApp from './reducers';
 import { newGame, startGame, addPlayer, roll } from './actions';
 import { h, createElement } from './utils/DOMUtils';
+import { randomNumber } from './utils/misc';
 import GameTable from './components/GameTable';
 import ActionButtons from './components/ActionButtons';
 
@@ -43,18 +44,19 @@ const getRandomRoll = (max) => Math.floor(Math.random() * (max + 1));
 
 // DOM events
 document.addEventListener('click', e => {
-  if (e.target.matches('.roll')) {
-    store.dispatch(roll(getRandomRoll(store.getState().game.pinsOnStand)));
+  if (e.target.matches('.new-game')) {
+    store.dispatch(newGame());
   } else if (e.target.matches('.add-player')) {
-    let input = document.querySelector('.player-name');
+    const input = document.querySelector('.player-name');
     if (input.value.length) {
       store.dispatch(addPlayer(input.value));
       input.value = '';
     }
-  } else if (e.target.matches('.new-game')) {
-    store.dispatch(newGame());
   } else if (e.target.matches('.start-game')) {
     store.dispatch(startGame());
+  } else if (e.target.matches('.roll')) {
+    const pins = randomNumber(0, store.getState().game.pinsOnStand);
+    store.dispatch(roll(pins));
   }
 });
 
