@@ -5,11 +5,9 @@ function restandPins(fallenPinsCount, isClosingRoll) {
   return (isClosingRoll || fallenPinsCount === 10) ? 10 : 10 - fallenPinsCount
 }
 
-
 function isGameOver({currentFrameIndex, currentPlayerIndex, playersCount}, isClosingRoll) {
   return currentFrameIndex === 9 && isClosingRoll && currentPlayerIndex === playersCount - 1
 }
-
 
 function getPointsUpdate(points, frames, frame, frameIndex, fallenPinsCount) {
   const summedPoints = [];
@@ -38,7 +36,6 @@ function getPointsUpdate(points, frames, frame, frameIndex, fallenPinsCount) {
   return summedPoints;
 }
 
-
 function getUpdatedPoints(points = [], frames, frame, frameIndex, fallenPinsCount) {
   const updatedPoints = getPointsUpdate(...arguments);
   const shouldUpdatePreviousPoints = !!updatedPoints.length;
@@ -58,7 +55,6 @@ function getUpdatedPoints(points = [], frames, frame, frameIndex, fallenPinsCoun
   ]
 }
 
-
 function getUpdatedFrames(playerFrames, playerFrame, currentFrameIndex) {
   if (!playerFrames.length) {
     return [playerFrame];
@@ -70,7 +66,6 @@ function getUpdatedFrames(playerFrames, playerFrame, currentFrameIndex) {
   ]
 }
 
-
 function isClosingFrameRollForPlayer(frameIndex, isAllPinsDown, rollNumber) {
   if (frameIndex < 9) {
     return isAllPinsDown || rollNumber === 2
@@ -78,11 +73,9 @@ function isClosingFrameRollForPlayer(frameIndex, isAllPinsDown, rollNumber) {
   return rollNumber === 3 || (rollNumber === 2 && !isAllPinsDown);
 };
 
-
 function addRollToFrame(frame, fallenPinsCount) {
   return frame ? [...frame, fallenPinsCount] : [fallenPinsCount];
 }
-
 
 function makeRoll(state, action) {
   const fallenPinsCount = action.pins;
@@ -124,7 +117,6 @@ function makeRoll(state, action) {
     status: isGameOver(state, isClosingRoll) ? 'over' : 'active'
   };
 }
-
 
 const initialGameState = {
   frames: {},
