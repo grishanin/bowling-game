@@ -1,5 +1,5 @@
-import expect from 'expect'
-import game from '../../js/reducers/game'
+import expect from 'expect';
+import game from '../../js/reducers/game';
 
 describe('reducers', () => {
   describe('game', () => {
