@@ -2,9 +2,12 @@ bowling-game
 =====================
 ### Description
 
-This is my "vanilla" JavaScript implementation of bowling game. It is influenced by Redux/Flux and React approach.
+Vanilla JavaScript bowling game. Created with toy Redux implemention.
 
-Also added support of multiplayer, special 10th frame and random rolls.
+### Features:
+* special 10th frame
+* multiplayer
+* random rolls
 
 ### Usage
 

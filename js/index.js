@@ -40,8 +40,6 @@ const render = () => {
 store.subscribe(render);
 store.dispatch(newGame());
 
-const getRandomRoll = (max) => Math.floor(Math.random() * (max + 1));
-
 // DOM events
 document.addEventListener('click', e => {
   if (e.target.matches('.new-game')) {
