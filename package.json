@@ -6,7 +6,6 @@
     "start": "webpack-dev-server --hot --inline",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register"
   },
-  "main": "index.js",
   "keywords": [
     "bowling",
     "game"

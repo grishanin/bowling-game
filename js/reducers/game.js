@@ -14,21 +14,19 @@ function getPointsUpdate(points, frames, frame, frameIndex, fallenPinsCount) {
 
   const isFirstFrame = frameIndex === 0;
   const rollNumber = frame.length;
+  const isFirstRoll = rollNumber === 1;
   const isBonusRoll = rollNumber === 3;
 
   if (isFirstFrame || isBonusRoll) return summedPoints;
 
-  const isRegularFrameOrFirstRollInThe10Frame = frameIndex < 9 || rollNumber === 1;
-  const isPrevTwoRollsStrike = frameIndex > 1
-    && frames[frameIndex - 1].length === 1
-    && frames[frameIndex - 2].length === 1;
+  const isPrevRollStrike = frames[frameIndex - 1].length === 1;
+  const isPrevTwoRollsStrike = frameIndex > 1 && isPrevRollStrike && frames[frameIndex - 2].length === 1;
 
-  if (isRegularFrameOrFirstRollInThe10Frame && isPrevTwoRollsStrike) {
+  if (isPrevTwoRollsStrike && isFirstRoll) {
     summedPoints.push(points[frameIndex - 2] + fallenPinsCount)
   }
 
-  const isPrevRollStrike = frames[frameIndex - 1].length === 1;
-  const isRollAfterSpareOrStrike = points[frameIndex - 1] === 10 && rollNumber === 1;
+  const isRollAfterSpareOrStrike = isFirstRoll && points[frameIndex - 1] === 10;
   if (isPrevRollStrike || isRollAfterSpareOrStrike) {
     summedPoints.push(points[frameIndex - 1] + fallenPinsCount)
   }
