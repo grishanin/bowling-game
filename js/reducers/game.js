@@ -141,6 +141,9 @@ export default function game(state = {}, action) {
         status: 'active'
       }
     case 'ROLL':
+      if (state.status === 'over') {
+        return state;
+      }
       return {
         ...state,
         ...makeRoll(state, action)

@@ -187,6 +187,24 @@ describe('reducers', () => {
 
         expect(state.points[0].reduce(sum, 0)).toEqual(300);
       });
+
+      it('should be 10 frames and not more', () => {
+        let state = {
+          frames: {},
+          points: {},
+          currentPlayerIndex: 0,
+          currentFrameIndex: 0,
+          pinsOnStand: 10,
+          playersCount: 1,
+          status: 'active'
+        };
+
+        for (var i = 0; i < 13; i++) {
+          state = game(state, {type: 'ROLL', pins: 10});
+        }
+
+        expect(state.frames[0].length).toEqual(10);
+      });
     })
   });
 });
